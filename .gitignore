@@ -1,0 +1,9 @@
+# 本地工具和生成文件
+.codex/
+.vscode/
+*.docx
+build_ddd_doc.py
+
+# tushu 工程本地 Git 元数据备份，不上传
+tushu/.git.local-backup/
+

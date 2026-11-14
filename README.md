@@ -1,1 +1,271 @@
 # library
+图书馆管理系统 - 五人分工任务书
+================================
+
+一、团队协作总原则
+------------------
+1. 每个组员主要修改自己的模块目录，避免多人同时修改同一个文件。
+2. include/common/ 下的公共头文件由队长统一维护。
+3. mainwindow.h、mainwindow.cpp 和 CMakeLists.txt 由队长最终集成。
+4. 组员之间通过 library_api.h 中定义的接口通信，不直接调用其他组员的实现代码。
+5. 每个模块完成后，必须提交代码、测试数据、说明文档和 Git 提交记录。
+
+二、队长：登录、权限、系统框架
+------------------------------
+负责目录和文件：
+  include/common/
+    applicationcontext.h
+    library_api.h
+    domain.h
+  main.cpp
+  mainwindow.h
+  mainwindow.cpp
+  CMakeLists.txt
+
+需要实现的功能：
+  1. 登录和退出登录。
+  2. User 端和 Manager 端切换。
+  3. 角色权限判断。
+  4. 主窗口导航和页面集成。
+  5. 公共弹窗、提示框和错误处理。
+  6. 统一管理公共数据结构和模块接口。
+  7. Git 分支管理、代码合并和最终发布。
+
+最终交付：
+  1. 可以启动的 Qt 主程序。
+  2. 登录和权限功能。
+  3. 完整的 CMake 配置。
+  4. 各模块集成后的最终版本。
+  5. Git 合并记录和发布说明。
+
+三、队员 1：图书与分类管理
+--------------------------
+负责目录和文件：
+  include/team1_books/
+    bookservice.h
+  src/team1_books/（后续新增）
+
+需要实现的功能：
+  1. 图书新增。
+  2. 图书编辑。
+  3. 图书查询和模糊搜索。
+  4. 图书详情展示。
+  5. 图书下架或删除。
+  6. 图书分类 Kinds 新增、编辑和停用。
+  7. 按分类筛选图书。
+  8. 图书总量和可借数量展示。
+
+数据库内容：
+  books
+  book_copies（如采用实体副本设计）
+  kinds
+
+最终交付：
+  1. 图书管理页面。
+  2. 分类管理页面。
+  3. BookService 和 KindService 实现。
+  4. 对应建表 SQL 和测试数据。
+  5. 至少 3 个测试用例。
+  6. 页面截图和模块说明。
+
+四、队员 2：借阅业务
+--------------------
+负责目录和文件：
+  include/team2_circulation/
+    borrowservice.h
+  src/team2_circulation/（后续新增）
+
+需要实现的功能：
+  1. 借书。
+  2. 还书。
+  3. 续借。
+  4. 图书预约。
+  5. 逾期判断。
+  6. 借阅记录查询。
+  7. 借书和还书时同步库存数量。
+  8. 防止重复借阅和无库存借阅。
+
+数据库内容：
+  loans
+  reservations
+
+最终交付：
+  1. 借阅管理页面。
+  2. BorrowService 实现。
+  3. 借还书事务处理。
+  4. 借阅和预约建表 SQL。
+  5. 正常、逾期、无库存等测试用例。
+  6. 借阅流程说明和页面截图。
+
+五、队员 3：用户与馆员管理
+--------------------------
+负责目录和文件：
+  include/team3_users/
+    workerservice.h
+  src/team3_users/（后续新增）
+
+需要实现的功能：
+  1. 读者信息新增、编辑和查询。
+  2. 馆员信息新增、编辑和查询。
+  3. 角色分配。
+  4. 账号启用和停用。
+  5. 密码修改。
+  6. 黑名单管理。
+  7. 馆员最后登录时间记录。
+  8. 不同角色的功能权限控制。
+
+数据库内容：
+  users
+  workers
+  roles
+  permissions
+  user_roles
+
+最终交付：
+  1. 读者管理页面。
+  2. 馆员管理页面。
+  3. WorkerService 和用户服务实现。
+  4. 用户、角色和权限建表 SQL。
+  5. 权限测试用例。
+  6. 模块说明和页面截图。
+
+六、队员 4：统计与系统信息
+--------------------------
+负责目录和文件：
+  include/team4_statistics/
+    statisticsservice.h
+  src/team4_statistics/（后续新增）
+
+需要实现的功能：
+  1. 藏书总量统计。
+  2. 可借数量统计。
+  3. 借出数量统计。
+  4. 逾期数量统计。
+  5. 读者数量统计。
+  6. 借阅趋势图。
+  7. 热门图书和热门分类统计。
+  8. 开馆时间和闭馆时间配置。
+  9. 借阅期限和续借次数配置。
+  10. 系统公告和操作日志展示。
+
+数据库内容：
+  system_settings
+  notices
+  audit_logs
+
+最终交付：
+  1. Manager 统计看板。
+  2. 系统信息配置页面。
+  3. StatisticsService 和 InformationService 实现。
+  4. 统计、公告和日志相关 SQL。
+  5. 统计数据测试用例。
+  6. 图表截图和模块说明。
+
+七、所有组员必须提交的材料
+----------------------------
+1. 源代码。
+2. 头文件和实现文件。
+3. 数据库建表或迁移 SQL。
+4. 测试数据。
+5. 至少 3 个测试用例。
+6. 页面截图。
+7. 模块使用说明。
+8. Git 分支和提交记录。
+9. 已知问题清单。
+10. 交接说明。
+
+八、Git 分支命名
+----------------
+队长：feature/app-shell
+队员 1：feature/books
+队员 2：feature/circulation
+队员 3：feature/users
+队员 4：feature/statistics
+
+提交示例：
+  git add .
+  git commit -m "feat(books): add book management"
+  git push origin feature/books
+
+九、四周进度安排
+----------------
+第 1 周：确定接口、数据库表、页面原型和项目骨架。
+第 2 周：完成各自主要页面和基础功能。
+第 3 周：完成数据库联调、权限控制和异常处理。
+第 4 周：统一 UI、联调测试、修复问题和准备答辩。
+
+十、给组员预留独立开发空间
+--------------------------
+项目采用“公共接口固定、模块目录独立”的方式，避免多人同时修改同一个文件。
+
+推荐目录：
+  include/
+    common/                         # 队长维护，组员只读
+    database/                       # 数据库公共接口
+    team1_books/                    # 队员 1 的头文件
+    team2_circulation/              # 队员 2 的头文件
+    team3_users/                    # 队员 3 的头文件
+    team4_statistics/               # 队员 4 的头文件
+
+  src/
+    team1_books/                    # 队员 1 的 cpp 文件
+    team2_circulation/              # 队员 2 的 cpp 文件
+    team3_users/                    # 队员 3 的 cpp 文件
+    team4_statistics/               # 队员 4 的 cpp 文件
+
+  tests/
+    team1_books/                    # 队员 1 的测试
+    team2_circulation/              # 队员 2 的测试
+    team3_users/                    # 队员 3 的测试
+    team4_statistics/               # 队员 4 的测试
+
+每个组员都拥有自己的头文件、cpp 文件和测试目录：
+
+  队员 1：include/team1_books/、src/team1_books/、tests/team1_books/
+  队员 2：include/team2_circulation/、src/team2_circulation/、tests/team2_circulation/
+  队员 3：include/team3_users/、src/team3_users/、tests/team3_users/
+  队员 4：include/team4_statistics/、src/team4_statistics/、tests/team4_statistics/
+
+模块文件示例：
+  include/team1_books/bookpage.h
+  src/team1_books/bookpage.cpp
+  tests/team1_books/bookpage_test.cpp
+
+文件修改规则：
+  1. 队员只能直接修改自己负责的 team 目录。
+  2. include/common/ 下的文件由队长统一维护。
+  3. mainwindow.h、mainwindow.cpp 由队长最后集成。
+  4. 组员之间通过 library_api.h 中的接口通信。
+  5. 不要在不同模块中重复定义 Book、Reader、Loan 等公共结构体。
+  6. 不要直接调用其他组员的 cpp 文件或私有变量。
+
+页面扩展规则：
+  每个组员独立实现自己的 QWidget 页面，例如：
+    BookPage
+    BorrowPage
+    WorkerPage
+    StatisticsPage
+
+  队长只在 mainwindow.cpp 中负责最终集成：
+    tabs->addTab(new BookPage, "图书管理");
+    tabs->addTab(new BorrowPage, "借阅管理");
+    tabs->addTab(new WorkerPage, "人员管理");
+    tabs->addTab(new StatisticsPage, "统计看板");
+
+CMake 规则：
+  尽量不要让组员反复修改 CMakeLists.txt，可以使用 CMake 自动收集模块文件：
+
+    file(GLOB_RECURSE MODULE_SOURCES CONFIGURE_DEPENDS
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h
+    )
+
+  组员只要把新的头文件和 cpp 文件放入自己的目录，队长重新配置 CMake 后即可参与编译。
+
+模块交接时必须说明：
+  1. 新增了哪些文件。
+  2. 使用了哪些公共接口。
+  3. 是否需要新增数据库表或字段。
+  4. 页面如何打开和测试。
+  5. 是否修改了 library_api.h。
+  6. 当前未完成内容和已知问题。

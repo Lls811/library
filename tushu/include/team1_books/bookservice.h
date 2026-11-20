@@ -13,3 +13,6 @@ using KindService = IKindService;
 }
 
 #endif // LIBRARY_TEAM1_BOOKSERVICE_H
+/*
+把公共接口 IBookService 和 IKindService 暴露给 Library::Team1 命名空间使用。
+*/
